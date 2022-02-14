@@ -4,7 +4,12 @@ import os
 import requests
 
 def main(repo):
-    filename = os.path.join("..", "data", "jira_records.csv")
+
+    filename = os.path.join("..", "data", "input", "jira_records.csv")
+    if os.path.exists(filename):
+        print(f"{__file__}: {filename} exists, nothing to be done")
+        return
+
     jira_api_base_url = "https://issues.apache.org/jira/"
     page_length = 500
     proj_jira_id = repo.upper()

@@ -5,6 +5,10 @@ from pydriller import Repository
 
 def main(repo_name):
 
+    filename = os.path.join("..", "data", "input", "vcs_records.csv")
+    if os.path.exists(filename):
+        print(f"{__file__}: {filename} exists, nothing to be done.")
+        return
     gh_repo = f"https://github.com/apache/{repo_name}.git"
     repo_path = os.path.join("..", "data", "repositories", repo_name)
     if not os.path.exists(repo_path):
@@ -15,7 +19,6 @@ def main(repo_name):
         repo = Repository(repo_path)
 
     print("done.\nTraversing repo");
-    filename = os.path.join("..", "data", "vcs_records.csv")
     count = 0
     with open(filename, 'w') as commits_file:
         commits_file.write('hash,author_date\n')
